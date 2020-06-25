@@ -1,0 +1,19 @@
+---
+
+  - name: set resource class to barmetal
+    shell: "for i in $(openstack --os-auth-url {{ os_auth }} --os-user-domain-name {{ domain_id }} --os-project-domain-name {{ domain_id }} --os-default-domain {{ domain_id }} --os-project-name {{ admin_project }} --os-username {{ admin_project }} --os-password {{ admin_password }} --insecure baremetal node list | awk '/enroll/ {print $2}'); do openstack --os-auth-url {{ os_auth }} --os-user-domain-name {{ domain_id }} --os-project-domain-name {{ domain_id }} --os-default-domain {{ domain_id }} --os-project-name {{ admin_project }} --os-username {{ admin_project }} --os-password {{ admin_password }} --insecure baremetal node set $i --resource-class baremetal ; done"
+    environment:
+      PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages/"
+
+
+  - name: manage enrolled barmetal
+    shell: "for i in $(openstack --os-auth-url {{ os_auth }} --os-user-domain-name {{ domain_id }} --os-project-domain-name {{ domain_id }} --os-default-domain {{ domain_id }} --os-project-name {{ admin_project }} --os-username {{ admin_project }} --os-password {{ admin_password }} --insecure baremetal node list | awk '/enroll/ {print $2}'); do openstack --os-auth-url {{ os_auth }} --os-user-domain-name {{ domain_id }} --os-project-domain-name {{ domain_id }} --os-default-domain {{ domain_id }} --os-project-name {{ admin_project }} --os-username {{ admin_project }} --os-password {{ admin_password }} --insecure baremetal node manage $i ; done"
+    environment:
+      PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages/"
+
+
+  - name: clean enrolled barmetal
+    shell: "for i in $(openstack --os-auth-url {{ os_auth }} --os-user-domain-name {{ domain_id }} --os-project-domain-name {{ domain_id }} --os-default-domain {{ domain_id }} --os-project-name {{ admin_project }} --os-username {{ admin_project }} --os-password {{ admin_password }} --insecure baremetal node list | awk '/manageable/ {print $2}'); do openstack --os-auth-url {{ os_auth }} --os-user-domain-name {{ domain_id }} --os-project-domain-name {{ domain_id }} --os-default-domain {{ domain_id }} --os-project-name {{ admin_project }} --os-username {{ admin_project }} --os-password {{ admin_password }} --insecure baremetal node provide $i ; done"
+    environment:
+      PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages/"
+

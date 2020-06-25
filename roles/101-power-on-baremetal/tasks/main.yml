@@ -1,0 +1,13 @@
+---
+
+  - name: set bootmode to pxe
+    shell: "for i in {{ node_ipmi_ip }}; do ipmitool -I lanplus -U {{ node_ipmi_user }} -P {{ node_ipmi_password }} -H $i chassis bootdev pxe ; done"
+    environment:
+      PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages/"
+
+
+  - name: power on nodes
+    shell: "for i in {{ node_ipmi_ip }}; do ipmitool -I lanplus -U {{ node_ipmi_user }} -P {{ node_ipmi_password }} -H $i power on ; done"
+    environment:
+      PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages/"
+

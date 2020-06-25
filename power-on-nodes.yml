@@ -1,0 +1,11 @@
+---
+- name: Enroll discovered Baremetal nodes
+  hosts:
+    - localhost
+  vars_files:
+    - vars/static-vars.yml
+
+
+  tasks:
+  roles: 
+    - role: 101-power-on-baremetal

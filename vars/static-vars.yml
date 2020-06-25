@@ -1,0 +1,11 @@
+---
+# OpenStack Keystone URL
+os_auth: https://X.X.X.X:13000/v3
+
+# OpenStack project and user
+cloud_admin: admin
+admin_project: admin
+# OpenStack user password
+admin_password: XXXXX
+# Keystone / LDAP domain
+domain_id: default
